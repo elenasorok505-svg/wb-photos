@@ -5,11 +5,12 @@ window.imgOne6=async function(path){
   try{
     let inp=null; for(let t=0;t<120&&!inp;t++){await wsl(250); try{inp=fr.contentDocument.querySelector('input[type=file][name=photo]')}catch(e){}}
     if(!inp) return {err:'noinput'};
+    await wsl(5000); inp=fr.contentDocument.querySelector('input[type=file][name=photo]');
     const W=fr.contentWindow; const cy={ids:null,prods:{},lists:0,t:0};
     const of=W.fetch; W.fetch=async function(a,o){const u=(typeof a=='string'?a:a.url);const r=await of.apply(this,arguments);try{if(/uploadsearch/.test(u)){r.clone().json().then(j=>{cy.ids=(j.result||[]).map(x=>x.im_name);cy.t=Date.now()})}else if(/u-card\/cards\/v4\/list/.test(u)){r.clone().json().then(j=>{for(const p of (j.products||[]))cy.prods[p.id]=p;cy.lists++;cy.t=Date.now()})}}catch(e){};return r};
     const f=new W.File([b],'p.jpg',{type:'image/jpeg'});const dt=new W.DataTransfer();dt.items.add(f);
     inp.files=dt.files;inp.dispatchEvent(new W.Event('change',{bubbles:true}));
-    let btn=null;for(let t=0;t<80&&!btn;t++){await wsl(250);btn=fr.contentDocument.querySelector('.popup-crop-search-image__button')}
+    let btn=null;for(let t=0;t<80&&!btn;t++){await wsl(250);btn=fr.contentDocument.querySelector('.popup-crop-search-image__button'); if(t==20&&!btn){inp=fr.contentDocument.querySelector('input[type=file][name=photo]');inp.files=dt.files;inp.dispatchEvent(new W.Event('change',{bubbles:true}));}}
     if(!btn) return {err:'nobtn'};
     btn.click();
     for(let t=0;t<160;t++){await wsl(250); if(cy.ids&&cy.lists>=1&&Date.now()-cy.t>2000)break;}
