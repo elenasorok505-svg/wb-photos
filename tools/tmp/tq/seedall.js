@@ -36,7 +36,7 @@ return await encJobs(jobs,0.82,900);};
 // window.__QS=['腋下包女','托特包女',...]; searchApi(); итог в window.__api {запрос:[{id,t,p,s,s90,img,b,cc,ad}]}
 window.searchApi=async()=>{window.__api=window.__api||{};window.__alog=[];window.__adone=false;for(const q of __QS){if(__api[q])continue;const out=[];for(const pg of [1,2])for(const si of [0,20,40]){try{const u='https://search.1688.com/service/marketOfferResultViewService?keywords='+encodeURIComponent(q)+'&charset=utf8&beginPage='+pg+'&pageSize=60&async=true&asyncCount=20&pageName=major&offset=0&startIndex='+si+'&sortType=va_rmdarkgmv';const j=await (await fetch(u,{credentials:'include'})).json();const L=(j.data&&j.data.data&&j.data.data.offerList)||[];for(const o of L){try{out.push({id:String(o.id),t:(o.information.subject||'').replace(/<[^>]+>/g,''),p:parseFloat(o.tradePrice.offerPrice.priceInfo.price),s:o.tradeQuantity.saleQuantity||0,s90:+(o.tradeQuantity.vaSales90||0),img:o.image.imgUrl,b:(o.information.brief||'').slice(0,300),cc:o.information.colorCount||0,ad:!!(o.trackInfoModel&&JSON.stringify(o.trackInfoModel).includes('p4p'))})}catch(e){}}}catch(e){__alog.push(q+' ERR '+e)}await new Promise(r=>setTimeout(r,1200+Math.random()*800));}__api[q]=out;__alog.push(q+':'+out.length);}window.__adone=true;};
 'ok';
-const b=new Blob(["onmessage=e=>setTimeout(()=>postMessage(e.data[0]),e.data[1])"]);window.__wk2=new Worker(URL.createObjectURL(b));window.__wcb={};window.__wid=0;__wk2.onmessage=e=>{const f=__wcb[e.data];delete __wcb[e.data];f&&f();};
+window.__wk2=new Worker(URL.createObjectURL(new Blob(["onmessage=e=>setTimeout(()=>postMessage(e.data[0]),e.data[1])"])));window.__wcb={};window.__wid=0;__wk2.onmessage=e=>{const f=__wcb[e.data];delete __wcb[e.data];f&&f();};
 window.wsl=ms=>new Promise(r=>{const id=++__wid;__wcb[id]=r;__wk2.postMessage([id,ms]);});
 window.crawlT=async(ids,delay)=>{const all=JSON.parse(localStorage.getItem('__tee')||'{}');window.__tlog=[];window.__tdone=false;for(const id of ids){if(all[id])continue;let x=null;try{x=await info(id);}catch(e){__tlog.push(id+':ERR');continue;}
 if(!x){const t=await (await fetch('/offer/'+id+'.html')).text();if(t.length<2000){__tlog.push(id+':BLOCK');break;}__tlog.push(id+':NULL');continue;}
@@ -49,7 +49,7 @@ window.fullT=async(keys)=>{const T=JSON.parse(localStorage.__tee);const ids=JSON
 for(const k of keys){const m=k.match(/^T(\d+)(_|m)(\d+)$/);const x=T[ids[+m[1]]];if(m[2]=='m'){jobs.push([k,x.imgs[+m[3]]]);continue;}const sp=(x.sp||[]).find(p=>p.v.some(v=>v[1]));jobs.push([k,sp.v[+m[3]][1]]);}
 return await encJobs(jobs,0.85,1200);};
 'okT';
-const b=new Blob(["onmessage=e=>setTimeout(()=>postMessage(e.data[0]),e.data[1])"]);window.__wk2=new Worker(URL.createObjectURL(b));window.__wcb={};window.__wid=0;__wk2.onmessage=e=>{const f=__wcb[e.data];delete __wcb[e.data];f&&f();};
+window.__wk2=new Worker(URL.createObjectURL(new Blob(["onmessage=e=>setTimeout(()=>postMessage(e.data[0]),e.data[1])"])));window.__wcb={};window.__wid=0;__wk2.onmessage=e=>{const f=__wcb[e.data];delete __wcb[e.data];f&&f();};
 window.wsl=ms=>new Promise(r=>{const id=++__wid;__wcb[id]=r;__wk2.postMessage([id,ms]);});
 window.crawlT=async(ids,delay)=>{const all=JSON.parse(localStorage.getItem('__tee')||'{}');window.__tlog=[];window.__tdone=false;for(const id of ids){if(all[id])continue;let x=null;try{x=await info(id);}catch(e){__tlog.push(id+':ERR');continue;}
 if(!x){const t=await (await fetch('/offer/'+id+'.html')).text();if(t.length<2000){__tlog.push(id+':BLOCK');break;}__tlog.push(id+':NULL');continue;}
