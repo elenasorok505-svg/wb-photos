@@ -16,7 +16,7 @@ window.imgOne7=async function(path){
     const cl=document.querySelector('.popup-crop-search-image .popup__close'); if(cl){cl.click(); await wsl(800);}
     const f=new File([b],'p'+Date.now()+'.jpg',{type:'image/jpeg'});const dt=new DataTransfer();dt.items.add(f);
     __cz={job:++__jobn,ids:null,prods:{},lists:0,t:0,h:null};
-    const inp=document.querySelector('input[type=file][name=photo]');inp.value='';inp.files=dt.files;inp.dispatchEvent(new Event('change',{bubbles:true}));
+    const inp=(document.querySelector('#popUpFileInput')||document.querySelector('input[type=file][name=photo]'));inp.value='';inp.files=dt.files;inp.dispatchEvent(new Event('change',{bubbles:true}));
     let btn=null;for(let t=0;t<60&&!btn;t++){await wsl(250);btn=document.querySelector('.popup-crop-search-image__button')}
     if(!btn){continue}
     await wsl(600); btn.click();
